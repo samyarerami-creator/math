@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>سامانه ریاضی نهم</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0b1f4d;--navy2:#1b4aa8;--sky:#38b6ff;--sky2:#e3f4ff;--bg:#f2f8ff;--card:#fff;--tx:#0b1f4d;--mu:#5f7396;--bd:#d6e6f7;--ok:#12a150;--bad:#e5484d;--btn:#1b4aa8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#08142e;--card:#0f2147;--tx:#e8f2ff;--mu:#8fa8cf;--bd:#1e3a6e;--sky2:#12305f;--btn:#2f7fe0;--ok:#3ddc84;--bad:#ff7a7f}}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.8;min-height:100vh}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--navy);z-index:10}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:linear-gradient(90deg,#0b1f4d,#1b4aa8);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:10px 16px}
+.brand{display:flex;gap:10px;align-items:center}.brand small{display:block;opacity:.8;font-size:12px;line-height:1.3}.brand b{line-height:1.3}
+.logo{width:40px;height:40px;border-radius:12px;background:var(--sky);color:var(--navy);display:grid;place-items:center;font-size:24px;font-weight:800}
+.ghost{background:rgba(255,255,255,.15);color:#fff;padding:6px 16px}
+.wrap{max-width:820px;margin:0 auto;padding:18px 14px 40px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:20px;margin-bottom:14px;box-shadow:0 2px 10px rgba(11,31,77,.05)}
+h1,h2,h3{margin:0 0 8px}
+input,textarea,select{width:100%;padding:11px 14px;border:1.5px solid var(--bd);border-radius:12px;font:inherit;background:var(--bg);color:var(--tx);margin:5px 0;outline:0}
+input:focus,textarea:focus,select:focus{border-color:var(--sky)}
+button{font:inherit;border:0;border-radius:12px;padding:10px 20px;background:var(--btn);color:#fff;cursor:pointer;font-weight:600}
+button:hover{filter:brightness(1.1)}
+button.sec{background:var(--sky2);color:var(--navy2)}
+:root:not([data-theme="light"]) button.sec{color:#bfe3ff}
+button.del{background:transparent;color:var(--bad);padding:4px 10px}
+button.big{width:100%;padding:14px;font-size:17px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.grow{flex:1}
+.mu{color:var(--mu)}.err{color:var(--bad);min-height:26px}
+.land{min-height:80vh;display:grid;place-items:center;border-radius:26px;padding:26px 14px;margin-top:10px;background:radial-gradient(circle at 80% 10%,#38b6ff55,transparent 45%),linear-gradient(160deg,#0b1f4d,#1b4aa8);color:#fff;text-align:center;overflow:hidden;position:relative}
+.land .sym{font-size:34px;letter-spacing:10px;color:var(--sky);direction:ltr;animation:fl 4s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-8px)}}
+.land .card{color:var(--tx);max-width:380px;margin:18px auto 0;text-align:right}
+.pw{position:relative}.pw button{position:absolute;left:6px;top:8px;padding:4px 10px;background:transparent;color:var(--mu)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:14px}
+.stat{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:12px;text-align:center;border-top:4px solid var(--sky)}
+.stat b{display:block;font-size:24px;color:var(--navy2)}
+:root:not([data-theme="light"]) .stat b{color:var(--sky)}
+.tabs{display:flex;gap:6px;background:var(--sky2);padding:5px;border-radius:14px;margin-bottom:14px;overflow-x:auto}
+.tabs button{flex:1;background:transparent;color:var(--navy2);white-space:nowrap}
+:root:not([data-theme="light"]) .tabs button{color:#bfe3ff}
+.tabs button.on{background:var(--btn);color:#fff}
+.opt{display:block;padding:11px 14px;border:1.5px solid var(--bd);border-radius:12px;margin:7px 0;cursor:pointer}
+.opt:has(input:checked){border-color:var(--sky);background:var(--sky2)}
+.opt input{width:auto;margin:0 0 0 8px}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse}
+th{background:var(--sky2);color:var(--navy2)}
+:root:not([data-theme="light"]) th{color:#bfe3ff}
+th,td{padding:9px 10px;border-bottom:1px solid var(--bd);text-align:right;white-space:nowrap}
+.empty{text-align:center;padding:34px 0;font-size:20px;color:var(--mu)}
+.q{border:1.5px dashed var(--bd);border-radius:14px;padding:12px;margin:10px 0}
+.badge{display:inline-block;padding:2px 12px;border-radius:99px;background:var(--sky2);color:var(--navy2);font-weight:600}
+:root:not([data-theme="light"]) .badge{color:#bfe3ff}
+.sticky{position:sticky;top:calc(58px + env(safe-area-inset-top,0px));z-index:8;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:10px 14px;margin-bottom:12px}
+.bar{height:8px;background:var(--sky2);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sky),var(--navy2));transition:width .3s}
+.ring{width:130px;height:130px;border-radius:50%;margin:10px auto;display:grid;place-items:center;background:conic-gradient(var(--sky) calc(var(--p)*1%),var(--sky2) 0)}
+.ring span{width:100px;height:100px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-weight:800;font-size:24px}
+.rv{border-radius:12px;padding:8px 12px;margin:5px 0;border:1.5px solid var(--bd)}.rv.ok{border-color:var(--ok)}.rv.no{border-color:var(--bad)}
+.hb{display:flex;align-items:center;gap:8px;margin:6px 0}.hb .bar{flex:1}.hb span{min-width:110px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+var SP="123987",TP="789123",KEY="mathexam_v1",S={exams:[],results:[]};
+try{var raw=localStorage.getItem(KEY);if(raw)S=JSON.parse(raw)}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+var $=function(i){return document.getElementById(i)},app=$("app"),me="",who="",draft=[],editId="",title="",dur="",fx="",fq="",T=null,CUR=null;
+function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML}
+function fa(n){return String(n).replace(/\d/g,function(d){return "۰۱۲۳۴۵۶۷۸۹"[d]})}
+function pct(r){return Math.round(r.score/r.total*100)}
+function avg(a){return a.length?Math.round(a.reduce(function(s,r){return s+pct(r)},0)/a.length):0}
+function dfa(t){try{return new Date(t).toLocaleDateString("fa-IR")}catch(e){return ""}}
+function find(id){return S.exams.filter(function(e){return e.id===id})[0]}
+function exT(id){var e=find(id);return e?e.title:"(حذف‌شده)"}
+function pc(v){return '<b style="color:var(--'+(v>=50?'ok':'bad')+')">'+fa(v)+'٪</b>'}
+function clr(){if(T){clearInterval(T);T=null}}
+function msg(p){return p>=90?"عالی بود! 🌟":p>=75?"خیلی خوب! 👏":p>=50?"قابل قبول؛ با کمی مرور بهتر هم می‌شود 💪":"نیاز به مرور بیشتری داری؛ ناامید نشو 📚"}
+function shell(b){clr();app.innerHTML='<header><div class="brand"><span class="logo">∑</span><div><b>سامانه ریاضی نهم</b><small>'+(who==="t"?'پنل معلم':'دانش‌آموز: '+esc(me))+'</small></div></div><button class="ghost" onclick="out()">خروج</button></header><div class="wrap">'+b+'</div>';window.scrollTo(0,0)}
+function out(){me="";who="";welcome()}
+
+function welcome(){clr();
+  app.innerHTML='<div class="wrap"><div class="land"><div><div class="sym">∑ π √ ÷</div><h1>به سامانه ریاضی نهم خوش آمدید 👋</h1><p style="opacity:.85">آزمون بده، نمره‌هایت را ببین و پیشرفتت را دنبال کن.</p>'+
+  '<div class="card"><b>ورود</b><div class="pw"><input id="pw" type="password" inputmode="numeric" placeholder="رمز ورود را وارد کن" autocomplete="off"><button onclick="var p=$(\'pw\');p.type=p.type===\'password\'?\'text\':\'password\'">👁</button></div><div class="err" id="er"></div><button class="big" id="go">ورود</button></div></div></div></div>';
+  var go=function(){var v=$("pw").value.trim();if(v===SP)nameStep();else if(v===TP){who="t";teacher("grades")}else $("er").textContent="رمز اشتباه است. دوباره امتحان کن."};
+  $("go").onclick=go;$("pw").onkeydown=function(e){if(e.key==="Enter")go()};$("pw").focus();
+}
+function nameStep(){
+  app.innerHTML='<div class="wrap"><div class="land"><div><h1>سلام! 😊</h1><div class="card"><p>نام و نام خانوادگی‌ات را بنویس تا کارنامه‌ات ثبت شود:</p><input id="nm" placeholder="مثلاً علی رضایی"><div class="err" id="er"></div><button class="big" id="go">ورود به پنل</button></div></div></div></div>';
+  var go=function(){var n=$("nm").value.trim().replace(/\s+/g," ");if(!n){$("er").textContent="لطفاً نام را وارد کن.";return}me=n;who="s";stu("exams")};
+  $("go").onclick=go;$("nm").onkeydown=function(e){if(e.key==="Enter")go()};$("nm").focus();
+}
+
+function stu(tab){
+  var mine=S.results.filter(function(r){return r.name===me}).sort(function(a,b){return b.t-a.t});
+  var ex=S.exams.filter(function(e){return e.qs.length}),pend=ex.filter(function(e){return !mine.some(function(r){return r.exam===e.id})});
+  var h='<h2>سلام '+esc(me)+' 👋</h2><div class="stats"><div class="stat"><b>'+fa(pend.length)+'</b>امتحان در انتظار</div><div class="stat"><b>'+fa(mine.length)+'</b>امتحان انجام‌شده</div><div class="stat"><b>'+(mine.length?fa(avg(mine))+'٪':'—')+'</b>میانگین من</div></div>'+
+  '<div class="tabs"><button class="'+(tab==="exams"?'on':'')+'" onclick="stu(\'exams\')">📝 امتحان‌ها</button><button class="'+(tab==="card"?'on':'')+'" onclick="stu(\'card\')">📋 کارنامه من</button></div>';
+  if(tab==="exams"){
+    if(!ex.length)h+='<div class="card empty">📭<br>برنامه شما خالی است</div>';
+    ex.forEach(function(e){var r=mine.filter(function(x){return x.exam===e.id})[0];
+      h+='<div class="card row"><div class="grow"><h3>'+esc(e.title)+'</h3><span class="mu">'+fa(e.qs.length)+' سؤال'+(e.min?' • '+fa(e.min)+' دقیقه':'')+'</span></div>'+
+      (r?'<span class="badge">'+fa(r.score)+' از '+fa(r.total)+'</span><button class="sec" onclick="review(\''+e.id+'\','+r.t+')">مرور</button>':'<button onclick="take(\''+e.id+'\')">شروع امتحان</button>')+'</div>'});
+  }else{
+    h+='<div class="card tw">';
+    if(!mine.length)h+='<div class="empty">هنوز نمره‌ای ثبت نشده است.</div>';
+    else{h+='<table><tr><th>امتحان</th><th>نمره</th><th>درصد</th><th>تاریخ</th><th></th></tr>';
+      mine.forEach(function(r){h+='<tr><td>'+esc(exT(r.exam))+'</td><td>'+fa(r.score)+' از '+fa(r.total)+'</td><td>'+pc(pct(r))+'</td><td>'+dfa(r.t)+'</td><td>'+(r.an&&find(r.exam)?'<button class="sec" onclick="review(\''+r.exam+'\','+r.t+')">مرور</button>':'')+'</td></tr>'});
+      h+='</table>'}
+    h+='</div>';
+  }
+  shell(h);
+}
+
+function take(id){
+  var e=find(id),left=(e.min||0)*60;CUR={e:e,an:e.qs.map(function(){return -1})};
+  var h='<div class="sticky"><div class="row"><b class="grow">'+esc(e.title)+'</b>'+(left?'<span class="badge" id="tm"></span>':'')+'<span class="mu" id="pg"></span></div><div class="bar"><i id="pb"></i></div></div>';
+  e.qs.forEach(function(q,i){h+='<div class="card"><h3>'+fa(i+1)+') '+esc(q.q)+'</h3>'+q.o.map(function(o,j){return '<label class="opt"><input type="radio" name="q'+i+'" onchange="CUR.an['+i+']='+j+';upd()">'+esc(o)+'</label>'}).join('')+'</div>'});
+  h+='<button class="big" onclick="fin()">ثبت پاسخ‌ها</button><p style="text-align:center"><button class="del" onclick="if(confirm(\'از امتحان انصراف می‌دهی؟\'))stu(\'exams\')">انصراف</button></p>';
+  shell(h);upd();
+  if(left){var tk=function(){var m=Math.floor(left/60),s=left%60;$("tm").textContent="⏱ "+fa(m)+":"+fa(("0"+s).slice(-2));if(left--<=0)fin(true)};tk();T=setInterval(tk,1000)}
+}
+function upd(){var n=CUR.an.filter(function(x){return x>=0}).length,t=CUR.an.length;$("pg").textContent=fa(n)+" از "+fa(t)+" پاسخ داده شد";$("pb").style.width=(n/t*100)+"%"}
+function fin(auto){
+  var e=CUR.e,sc=0,miss=0;e.qs.forEach(function(q,i){if(CUR.an[i]<0)miss++;else if(CUR.an[i]===q.a)sc++});
+  if(!auto&&miss&&!confirm(fa(miss)+" سؤال بی‌پاسخ مانده. ثبت شود؟"))return;
+  clr();var r={exam:e.id,name:me,score:sc,total:e.qs.length,t:Date.now(),an:CUR.an};S.results.push(r);save();resView(r);
+}
+function review(id,t){var r=S.results.filter(function(x){return x.exam===id&&x.t===t})[0];if(r)resView(r)}
+function resView(r){
+  var e=find(r.exam),p=pct(r);
+  var h='<div class="card" style="text-align:center"><h2>'+esc(exT(r.exam))+'</h2><div class="ring" style="--p:'+p+'"><span>'+fa(p)+'٪</span></div><h3>نمره: '+fa(r.score)+' از '+fa(r.total)+'</h3><p>'+msg(p)+'</p></div>';
+  if(e&&r.an){h+='<h3>مرور پاسخ‌ها</h3>';e.qs.forEach(function(q,i){var a=r.an[i],ok=a===q.a;
+    h+='<div class="rv '+(ok?'ok':'no')+'"><b>'+fa(i+1)+') '+esc(q.q)+'</b><br>'+(ok?'✅ پاسخ تو درست بود: '+esc(q.o[q.a]):(a>=0?'❌ پاسخ تو: '+esc(q.o[a])+'<br>':'❌ بی‌پاسخ<br>')+'✅ پاسخ درست: '+esc(q.o[q.a]))+'</div>'})}
+  h+='<p style="margin-top:14px"><button onclick="stu(\'exams\')">بازگشت به پنل</button></p>';shell(h);
+}
+
+function teacher(tab){
+  var h='<div class="tabs"><button class="'+(tab==="grades"?'on':'')+'" onclick="teacher(\'grades\')">📊 نمرات</button><button class="'+(tab==="students"?'on':'')+'" onclick="teacher(\'students\')">👩‍🎓 کارنامه دانش‌آموزان</button><button class="'+(tab==="design"?'on':'')+'" onclick="teacher(\'design\')">✏️ طرح امتحان</button></div>';
+  h+=tab==="grades"?gradesHtml():tab==="students"?studentsHtml():designHtml();shell(h);
+  if(tab==="design"&&$("et")){$("et").value=title;$("dm").value=dur}
+}
+function stat(l,v){return '<div class="stat"><b>'+fa(v)+'</b>'+l+'</div>'}
+function gradesHtml(){
+  var nm={};S.results.forEach(function(r){nm[r.name]=1});
+  var h='<div class="stats">'+stat('امتحان‌ها',S.exams.length)+stat('دانش‌آموزان',Object.keys(nm).length)+stat('نمرات ثبت‌شده',S.results.length)+stat('میانگین کل',avg(S.results)+'٪')+'</div>';
+  if(S.exams.length){h+='<div class="card"><h3>میانگین هر امتحان</h3>';S.exams.forEach(function(e){var rs=S.results.filter(function(r){return r.exam===e.id}),a=avg(rs);
+    h+='<div class="hb"><span>'+esc(e.title)+'</span><div class="bar"><i style="width:'+a+'%"></i></div><span>'+(rs.length?fa(a)+'٪ ('+fa(rs.length)+' نفر)':'بدون نمره')+'</span></div>'});h+='</div>'}
+  h+='<div class="card row"><select style="flex:1" onchange="fx=this.value;teacher(\'grades\')"><option value="">همهٔ امتحان‌ها</option>'+S.exams.map(function(e){return '<option value="'+e.id+'"'+(fx===e.id?' selected':'')+'>'+esc(e.title)+'</option>'}).join('')+'</select><input style="flex:1" placeholder="جستجوی نام + Enter" value="'+esc(fq)+'" onchange="fq=this.value.trim();teacher(\'grades\')"></div>';
+  var rs=S.results.filter(function(r){return (!fx||r.exam===fx)&&(!fq||r.name.indexOf(fq)>-1)}).sort(function(a,b){return b.t-a.t});
+  h+='<div class="card tw">';
+  if(!rs.length)h+='<div class="empty">نمره‌ای پیدا نشد.</div>';
+  else{h+='<p class="mu">'+fa(rs.length)+' نتیجه — میانگین: '+pc(avg(rs))+'</p><table><tr><th>نام</th><th>امتحان</th><th>نمره</th><th>درصد</th><th>تاریخ</th><th></th></tr>';
+    rs.forEach(function(r){h+='<tr><td>'+esc(r.name)+'</td><td>'+esc(exT(r.exam))+'</td><td>'+fa(r.score)+' / '+fa(r.total)+'</td><td>'+pc(pct(r))+'</td><td>'+dfa(r.t)+'</td><td><button class="del" onclick="delRes('+r.t+')">حذف</button></td></tr>'});
+    h+='</table>'}
+  h+='</div>';if(S.results.length)h+='<button class="sec" onclick="resetRes()">پاک کردن همهٔ نمرات</button>';return h;
+}
+function studentsHtml(){
+  var h='<div class="card tw"><h3>آمار هر امتحان</h3>';
+  if(!S.exams.length)h+='<p class="mu">هنوز امتحانی نیست.</p>';
+  else{h+='<table><tr><th>امتحان</th><th>شرکت‌کننده</th><th>میانگین</th><th>بالاترین</th><th>پایین‌ترین</th></tr>';
+    S.exams.forEach(function(e){var rs=S.results.filter(function(r){return r.exam===e.id}),p=rs.map(pct),n=rs.length;
+      h+='<tr><td>'+esc(e.title)+'</td><td>'+fa(n)+'</td><td>'+(n?pc(avg(rs)):'—')+'</td><td>'+(n?pc(Math.max.apply(null,p)):'—')+'</td><td>'+(n?pc(Math.min.apply(null,p)):'—')+'</td></tr>'});
+    h+='</table>'}
+  h+='</div><div class="card"><h3>رتبه‌بندی و کارنامه (با کلیک روی نام باز می‌شود)</h3>';
+  var by={};S.results.forEach(function(r){(by[r.name]=by[r.name]||[]).push(r)});
+  var ns=Object.keys(by).sort(function(a,b){return avg(by[b])-avg(by[a])});
+  if(!ns.length)h+='<p class="mu">هنوز دانش‌آموزی امتحان نداده است.</p>';
+  ns.forEach(function(n,i){var l=by[n].sort(function(a,b){return b.t-a.t});
+    h+='<details style="border-bottom:1px solid var(--bd);padding:8px 0"><summary style="cursor:pointer">'+fa(i+1)+'. '+esc(n)+' — '+fa(l.length)+' امتحان — میانگین '+pc(avg(l))+'</summary><div class="tw"><table>';
+    l.forEach(function(r){h+='<tr><td>'+esc(exT(r.exam))+'</td><td>'+fa(r.score)+' / '+fa(r.total)+'</td><td>'+pc(pct(r))+'</td><td>'+dfa(r.t)+'</td></tr>'});
+    h+='</table></div></details>'});
+  return h+'</div>';
+}
+function designHtml(){
+  var h='<div class="card"><h3>'+(editId?'ویرایش امتحان':'امتحان جدید')+'</h3><input id="et" placeholder="عنوان امتحان (مثلاً فصل ۳: عبارت‌های جبری)"><input id="dm" type="number" min="0" placeholder="زمان امتحان به دقیقه (خالی = بدون زمان)">';
+  draft.forEach(function(q,i){h+='<div class="q"><b>'+fa(i+1)+') '+esc(q.q)+'</b><br><span class="mu">پاسخ درست: '+esc(q.o[q.a])+'</span> <button class="del" onclick="keep();draft.splice('+i+',1);teacher(\'design\')">حذف</button></div>'});
+  h+='<div class="q"><h3>افزودن سؤال</h3><textarea id="qq" rows="2" placeholder="متن سؤال"></textarea>'+
+  [0,1,2,3].map(function(i){return '<div class="row"><input type="radio" name="ca" value="'+i+'" style="width:auto"'+(i===0?' checked':'')+'><input id="o'+i+'" placeholder="گزینه '+fa(i+1)+'" style="flex:1"></div>'}).join('')+
+  '<p class="mu">گزینهٔ درست را با دایره انتخاب کن.</p><div class="err" id="er"></div><button class="sec" onclick="addQ()">+ افزودن سؤال</button></div>'+
+  '<button class="big" onclick="pub()">'+(editId?'ذخیرهٔ تغییرات':'انتشار امتحان')+'</button>'+(editId?' <button class="del" onclick="editId=\'\';draft=[];title=\'\';dur=\'\';teacher(\'design\')">لغو ویرایش</button>':'')+'</div>';
+  h+='<div class="card"><h3>امتحان‌های منتشرشده</h3>';
+  if(!S.exams.length)h+='<p class="mu">هنوز امتحانی نیست.</p>';
+  S.exams.forEach(function(e){h+='<div class="row" style="border-bottom:1px solid var(--bd)"><span class="grow">'+esc(e.title)+' <span class="mu">('+fa(e.qs.length)+' سؤال'+(e.min?' • '+fa(e.min)+' دقیقه':'')+')</span></span><button class="del" style="color:var(--navy2)" onclick="editExam(\''+e.id+'\')">ویرایش</button><button class="del" onclick="delExam(\''+e.id+'\')">حذف</button></div>'});
+  return h+'</div>';
+}
+function keep(){if($("et")){title=$("et").value;dur=$("dm").value}}
+function addQ(){
+  var q=$("qq").value.trim(),o=[0,1,2,3].map(function(i){return $("o"+i).value.trim()});
+  if(!q||o.some(function(x){return !x})){$("er").textContent="سؤال و هر چهار گزینه را پر کن.";return}
+  keep();draft.push({q:q,o:o,a:+document.querySelector('input[name="ca"]:checked').value});teacher("design");
+}
+function pub(){
+  var t=$("et").value.trim(),m=parseInt($("dm").value)||0;
+  if(!t||!draft.length){$("er").textContent="عنوان و حداقل یک سؤال لازم است.";return}
+  if(editId){S.exams.forEach(function(e){if(e.id===editId){e.title=t;e.qs=draft;e.min=m}});editId=""}else S.exams.push({id:"e"+Date.now(),title:t,qs:draft,min:m});
+  draft=[];title="";dur="";save();teacher("design");
+}
+function editExam(id){
+  var e=find(id);if(!e)return;
+  if(S.results.some(function(r){return r.exam===id})&&!confirm('این امتحان قبلاً نمره دارد. تغییر سؤال‌ها نمره‌های قبلی را عوض نمی‌کند. ادامه؟'))return;
+  editId=id;title=e.title;dur=e.min||"";draft=JSON.parse(JSON.stringify(e.qs));teacher("design");
+}
+function delExam(id){if(!confirm("این امتحان حذف شود؟"))return;S.exams=S.exams.filter(function(e){return e.id!==id});save();teacher("design")}
+function delRes(t){S.results=S.results.filter(function(r){return r.t!==t});save();teacher("grades")}
+function resetRes(){if(!confirm("همهٔ نمره‌ها پاک شود؟"))return;S.results=[];save();teacher("grades")}
+welcome();
+</script>
+</body>
+</html>
